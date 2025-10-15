@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krishna Tours and Travels | Explore India</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Load Lucide Icons for aesthetic icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Custom styles for scroll-snapping on mobile for a 'slider' feel */
+    .snap-x-mandatory {
+      scroll-snap-type: x mandatory;
+    }
+
+    .snap-start {
+      scroll-snap-align: start;
+    }
+
+    /* Custom scrollbar for desktop aesthetics */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
+    }
+
+    /* Set default font to Inter - using bolder weights for headers for elegance */
+    html {
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    /* Style for the slider container */
+    .slider-item {
+      transition: opacity 0.5s ease-in-out;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slider-item.active {
+      opacity: 1;
+      position: relative;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+  <!-- 1. Running Offer Bar -->
+  <div id="offer-bar"
+    class="bg-orange-600 text-white text-center py-2 text-sm font-semibold sticky top-0 z-50 shadow-md overflow-hidden">
+    <div class="offer-content d-inline-block" style="white-space: nowrap; animation: marquee 30s linear infinite;">
+      🎉 दिवाळीचा खास ऑफर! जलगाव ते सावरीया शेट, चित्तोडगड, पुष्कर, सालसर बालाजी धाम, ख्यातू शंम, जयपूर, वृंदावन, मथुरा,
+      उज्जैन महाकाल आणि परत जलगाव!
+      नवीन अर्टिगा AC XL6 मध्ये फक्त ₹10,000 प्रति व्यक्ती! 🚗✨ दिवाळीत नवीन ठिकाणं एक्सप्लोर करा, आणि मनसोक्त आनंद
+      घ्या!
+    </div>
+  </div>
+
+  <!-- Bootstrap 5's CSS for the animation -->
+  <style>
+    @keyframes marquee {
+      0% {
+        transform: translateX(100%);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+  </style>
+
+
+
+  <!-- 2. Header and Navigation (Constrained for Readability) -->
+  <header class="sticky top-10 lg:top-0 bg-white shadow-lg z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <!-- Logo -->
+        <a href="#" class="flex-shrink-0 text-2xl font-extrabold text-orange-600 tracking-tight">
+          Krishna Tours and Travels
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex lg:space-x-8">
+          <a href="#featured" class="text-gray-600 hover:text-orange-600 transition duration-150 py-2">Home</a>
+          <a href="#trips" class="text-gray-600 hover:text-orange-600 transition duration-150 py-2">Recent Trips</a>
+          <a href="#vehicles" class="text-gray-600 hover:text-orange-600 transition duration-150 py-2">Vehicles</a>
+          <a href="#why-us" class="text-gray-600 hover:text-orange-600 transition duration-150 py-2">Why Choose Us</a>
+          <a href="#feedback" class="text-gray-600 hover:text-orange-600 transition duration-150 py-2">FeedBacks</a>
+          <a href="#contact" class="text-gray-600 hover:text-orange-600 transition duration-150 py-2">Contact Us</a>
+        </nav>
+
+        <!-- CTAs -->
+        <div class="hidden sm:flex space-x-3">
+          <a href="https://wa.me/918530330177?text=Hi,%20I%20am%20interested%20in%20your%20services!"
+            class="px-4 py-2 text-sm font-medium rounded-full text-orange-600 bg-white border border-orange-600 hover:bg-orange-50 transition duration-300 shadow-sm text-center inline-block">
+            Enquiry
+          </a>
+
+          <!-- Book Now Button -->
+          <a href="https://wa.me/918530330177?text=Hi,%20I%20would%20like%20to%20book%20now!"
+            class="px-4 py-2 text-sm font-medium rounded-full text-white bg-orange-600 hover:bg-orange-700 transition duration-300 shadow-lg text-center inline-block">
+            Book Now
+          </a>
+        </div>
+
+
+        <!-- Mobile menu button (Hamburger) -->
+        <div class="lg:hidden">
+          <button id="mobile-menu-button"
+            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500">
+            <!-- Menu Icon -->
+            <svg id="menu-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <!-- Close Icon -->
+            <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <nav id="mobile-menu" class="lg:hidden hidden px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-xl">
+      <a href="#featured"
+        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-orange-50 hover:text-orange-600"
+        onclick="toggleMenu()">Home</a>
+      <a href="#trips"
+        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-orange-50 hover:text-orange-600"
+        onclick="toggleMenu()">Recent Trips</a>
+      <a href="#vehicles"
+        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-orange-50 hover:text-orange-600"
+        onclick="toggleMenu()">Vehicles</a>
+      <a href="#why-us"
+        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-orange-50 hover:text-orange-600"
+        onclick="toggleMenu()">Why Choose Us</a>
+      <a href="#feedback"
+        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-orange-50 hover:text-orange-600"
+        onclick="toggleMenu()">FeedBacks</a>
+      <a href="#contact"
+        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-orange-50 hover:text-orange-600"
+        onclick="toggleMenu()">Contact Us</a>
+      <div class="pt-4 flex justify-around">
+        <!-- Enquiry Button -->
+        <a href="https://wa.me/918530330177?text=Hi,%20I%20am%20interested%20in%20your%20services!"
+          class="w-1/2 mx-1 py-2 text-sm font-medium rounded-full text-orange-600 border border-orange-600 hover:bg-orange-50 transition duration-300 text-center inline-block">
+          Enquiry
+        </a>
+
+        <!-- Book Now Button -->
+        <a href="https://wa.me/918530330177?text=Hi,%20I%20am%20interested%20in%20your%20services!"
+          class="w-1/2 mx-1 py-2 text-sm font-medium rounded-full text-white bg-orange-600 hover:bg-orange-700 transition duration-300 text-center inline-block">
+          Book Now
+        </a>
+      </div>
+
+    </nav>
+  </header>
+
+  <main class="py-0">
+    <!-- Message Box for Alerts -->
+    <div id="message-box"
+      class="fixed top-24 right-4 z-50 hidden bg-green-500 text-white px-4 py-3 rounded-lg shadow-xl transition-all duration-300 ease-in-out">
+      Message
+    </div>
+
+    <!-- 3. Featured Image Slider (FULL WIDTH) -->
+    <section id="featured" class="w-full mb-16">
+      <div class="relative w-full h-80 sm:h-96 overflow-hidden shadow-2xl">
+        <!-- Slider Container -->
+        <div id="image-slider" class="relative w-full h-full">
+          <!-- Slide 1 -->
+          <div class="slider-item active" data-link="https://example.com/diwali-offer">
+            <img src="https://as1.ftcdn.net/jpg/05/88/42/18/1000_F_588421867_x3I5wbqlu1RfrAvA8mHshER0Q65BvuWm.jpg"
+              alt="Diwali Special Tour" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center p-4">
+              <div class="text-center text-white max-w-4xl mx-auto">
+                <h2 class="text-3xl sm:text-5xl font-extrabold mb-2">श्री श्यामबाबांची दिव्य यात्रा</h2>
+                <p class="text-lg sm:text-xl font-medium mb-4">आता पाहा आणि आपल्या दिवाळीचा अनोखा अनुभव घ्या!</p>
+                <a href="https://example.com/diwali-offer" target="_blank"
+                  class="inline-block px-6 py-3 bg-orange-600 text-white font-semibold rounded-full hover:bg-orange-700 transition duration-300 shadow-lg">तुमचा
+                  ऑफर पहा</a>
+              </div>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="slider-item" data-link="https://example.com/himalayan-trek">
+            <img src="https://placehold.co/1200x500/8b5cf6/ffffff?text=Himalayan+Adventure" alt="Himalayan Adventure"
+              class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center p-4">
+              <div class="text-center text-white max-w-4xl mx-auto">
+                <h2 class="text-3xl sm:text-5xl font-extrabold mb-2">Trekking in the Himalayas</h2>
+                <p class="text-lg sm:text-xl font-medium mb-4">Discover the hidden trails.</p>
+                <a href="https://example.com/himalayan-trek" target="_blank"
+                  class="inline-block px-6 py-3 bg-white text-gray-800 font-semibold rounded-full hover:bg-gray-200 transition duration-300 shadow-lg">Learn
+                  More</a>
+              </div>
+            </div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="slider-item" data-link="https://example.com/kerala-backwaters">
+            <img src="https://placehold.co/1200x500/10b981/ffffff?text=Kerala+Backwaters+Relax"
+              alt="Kerala Backwaters Relax" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center p-4">
+              <div class="text-center text-white max-w-4xl mx-auto">
+                <h2 class="text-3xl sm:text-5xl font-extrabold mb-2">Relax in Kerala's Backwaters</h2>
+                <p class="text-lg sm:text-xl font-medium mb-4">Your perfect getaway is here.</p>
+                <a href="https://example.com/kerala-backwaters" target="_blank"
+                  class="inline-block px-6 py-3 bg-orange-600 text-white font-semibold rounded-full hover:bg-orange-700 transition duration-300 shadow-lg">Book
+                  Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slider Navigation -->
+        <button id="prev-button"
+          class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 p-3 rounded-full text-white hover:bg-opacity-75 transition z-10">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-chevron-left">
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+        </button>
+        <button id="next-button"
+          class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 p-3 rounded-full text-white hover:bg-opacity-75 transition z-10">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-chevron-right">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </button>
+
+        <!-- Dots Indicator -->
+        <div id="slider-dots" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+          <!-- Dots will be generated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Our Recent Trips Section (FULL WIDTH CONTAINER) -->
+    <section id="trips" class="w-full py-8">
+      <!-- Content constrained inside for padding and max-width -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-8 text-center">Our Recent Trips</h2>
+        <div class="flex overflow-x-scroll snap-x-mandatory lg:grid lg:grid-cols-3 gap-8 pb-4 hide-scrollbar">
+          <!-- Trip Card 1 -->
+          <div
+            class="snap-start flex-shrink-0 w-[85vw] sm:w-[50vw] lg:w-auto bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 border border-gray-100">
+            <img src="https://placehold.co/400x250/ef4444/ffffff?text=Rajasthan+Forts"
+              onerror="this.src='https://placehold.co/400x250/ef4444/ffffff?text=Rajasthan';" alt="Rajasthan Forts Tour"
+              class="w-full h-48 object-cover">
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Rajasthan Royal Tour</h3>
+              <p class="text-sm text-gray-600 mb-4">A 7-day journey through Jaipur, Jodhpur, and Udaipur, exploring
+                ancient forts and palaces.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold text-orange-600">₹18,500/person</span>
+                <button onclick="showMessage('View Details for Rajasthan trip.')"
+                  class="px-3 py-1 text-sm bg-orange-600 text-white rounded-full hover:bg-orange-700 transition">View
+                  Trip</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trip Card 2 -->
+          <div
+            class="snap-start flex-shrink-0 w-[85vw] sm:w-[50vw] lg:w-auto bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 border border-gray-100">
+            <img src="https://placehold.co/400x250/10b981/ffffff?text=Goa+Beaches+Holiday"
+              onerror="this.src='https://placehold.co/400x250/10b981/ffffff?text=Goa';" alt="Goa Beaches Holiday"
+              class="w-full h-48 object-cover">
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Goa Beach Bliss</h3>
+              <p class="text-sm text-gray-600 mb-4">A relaxing 4-day trip covering North and South Goa's best beaches
+                and nightlife.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold text-orange-600">₹12,000/person</span>
+                <button onclick="showMessage('View Details for Goa trip.')"
+                  class="px-3 py-1 text-sm bg-orange-600 text-white rounded-full hover:bg-orange-700 transition">View
+                  Trip</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trip Card 3 -->
+          <div
+            class="snap-start flex-shrink-0 w-[85vw] sm:w-[50vw] lg:w-auto bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 border border-gray-100">
+            <img src="https://placehold.co/400x250/3b82f6/ffffff?text=Himachal+Mountain+View"
+              onerror="this.src='https://placehold.co/400x250/3b82f6/ffffff?text=Himachal';"
+              alt="Himachal Mountain View" class="w-full h-48 object-cover">
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Himachal Pradesh Getaway</h3>
+              <p class="text-sm text-gray-600 mb-4">5 days of serene views, including Manali and Shimla. Perfect for
+                nature lovers.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold text-orange-600">₹15,200/person</span>
+                <button onclick="showMessage('View Details for Himachal trip.')"
+                  class="px-3 py-1 text-sm bg-orange-600 text-white rounded-full hover:bg-orange-700 transition">View
+                  Trip</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- View All Trips Button -->
+        <div class="text-center mt-8">
+          <a href="/all-trips"
+            class="px-6 py-3 text-lg font-semibold text-white bg-orange-600 rounded-full hover:bg-orange-700 transition duration-300">
+            View All Trips
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Our Vehicles Section (FULL WIDTH CONTAINER with background) -->
+    <section id="vehicles" class="w-full py-16 bg-white shadow-lg">
+      <!-- Content constrained inside for padding and max-width -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-8 text-center">Our Premium Vehicles</h2>
+        <div class="flex overflow-x-scroll snap-x-mandatory lg:grid lg:grid-cols-4 gap-6 pb-4 hide-scrollbar">
+          <!-- Vehicle Card 1: Maruti Ertiga XL6 -->
+          <div
+            class="snap-start flex-shrink-0 w-[80vw] sm:w-[45vw] md:w-[30vw] lg:w-auto bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 border border-gray-100">
+            <img
+              src="https://stimg.cardekho.com/images/car-images/930x620/Maruti/Ertiga/8711/1650016330874/224_white_fffff.jpg?tr=w-898"
+              onerror="this.src='https://placehold.co/400x250/22c55e/ffffff?text=Ertiga+XL6';" alt="Maruti Ertiga XL6"
+              class="w-full h-40 object-cover rounded-t-xl">
+            <div class="p-4 text-center">
+              <h3 class="text-2xl font-bold text-gray-900 mb-1">Maruti Ertiga XL6</h3>
+              <p class="text-xs font-semibold text-gray-700 mb-3">6-Seater Premium MPV</p>
+              <ul class="text-left text-sm text-gray-600 space-y-1 mb-4">
+                <li class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-users w-4 h-4 mr-2 text-orange-500">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                  Seating: 6 Adults
+                </li>
+                <li class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-snowflakes w-4 h-4 mr-2 text-orange-500">
+                    <path d="M2 12h20" />
+                    <path d="m12 2 4 4" />
+                    <path d="m12 22-4-4" />
+                    <path d="m17 5-5 5-5-5" />
+                    <path d="m17 19-5-5-5 5" />
+                  </svg>
+                  Ultimate Comfort AC
+                </li>
+                <li class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-briefcase w-4 h-4 mr-2 text-orange-500">
+                    <rect width="20" height="14" x="2" y="7" rx="2" ry="2" />
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                  </svg>
+                  Spacious Boot Space
+                </li>
+              </ul>
+
+              <!-- Available Status -->
+              <p class="text-sm font-semibold text-green-600 mb-4">Status: Available</p>
+
+              <button onclick="showMessage('Request booking for Maruti Ertiga XL6.')"
+                class="w-full py-2 text-sm font-semibold text-white bg-gray-900 rounded-full hover:bg-gray-700 transition">
+                Book This
+              </button>
+            </div>
+          </div>
+
+          <!-- Vehicle Card 2: Innova Crysta -->
+          <div
+            class="snap-start flex-shrink-0 w-[80vw] sm:w-[45vw] md:w-[30vw] lg:w-auto bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 border border-gray-100">
+            <img src="https://placehold.co/400x250/22c55e/ffffff?text=Innova+Crysta"
+              onerror="this.src='https://placehold.co/400x250/22c55e/ffffff?text=Innova';" alt="Toyota Innova Crysta"
+              class="w-full h-40 object-cover rounded-t-xl">
+            <div class="p-4 text-center">
+              <h3 class="text-2xl font-bold text-gray-900 mb-1">Innova Crysta</h3>
+              <p class="text-xs font-semibold text-gray-700 mb-3">7-Seater Premium MPV</p>
+              <ul class="text-left text-sm text-gray-600 space-y-1 mb-4">
+                <li class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-users w-4 h-4 mr-2 text-orange-500">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                  Seating: 7 Adults
+                </li>
+                <li class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-snowflakes w-4 h-4 mr-2 text-orange-500">
+                    <path d="M2 12h20" />
+                    <path d="m12 2 4 4" />
+                    <path d="m12 22-4-4" />
+                    <path d="m17 5-5 5-5-5" />
+                    <path d="m17 19-5-5-5 5" />
+                  </svg>
+                  Ultimate Comfort AC
+                </li>
+                <li class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-briefcase w-4 h-4 mr-2 text-orange-500">
+                    <rect width="20" height="14" x="2" y="7" rx="2" ry="2" />
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                  </svg>
+                  Huge Luggage Space
+                </li>
+              </ul>
+
+              <!-- Available Status -->
+              <p class="text-sm font-semibold text-green-600 mb-4">Status: Available</p>
+
+              <button onclick="showMessage('Request booking for Innova Crysta.')"
+                class="w-full py-2 text-sm font-semibold text-white bg-gray-900 rounded-full hover:bg-gray-700 transition">Book
+                This</button>
+            </div>
+          </div>
+          <!-- Vehicle Card 3: Tempo Traveller (12 Seater) -->
+          <div
+            class="snap-start flex-shrink-0 w-[80vw] sm:w-[45vw] md:w-[30vw] lg:w-auto bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 border border-gray-100">
+            <img src="https://placehold.co/400x250/f59e0b/ffffff?text=Tempo+Traveller"
+              onerror="this.src='https://placehold.co/400x250/f59e0b/ffffff?text=Tempo';" alt="Tempo Traveller"
+              class="w-full h-40 object-cover rounded-t-xl">
+            <div class="p-4 text-center">
+              <h3 class="text-2xl font-bold text-gray-900 mb-1">Tempo Traveller</h3>
+              <p class="text-xs font-semibold text-gray-700 mb-3">12-Seater Group Van</p>
+              <ul class="text-left text-sm text-gray-600 space-y-1 mb-4">
+                <li class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-users-2 w-4 h-4 mr-2 text-orange-500">
+                    <path d="M14 19a6 6 0 0 0-12 0" />
+                    <circle cx="8" cy="10" r="4" />
+                    <path d="M22 19a6 6 0 0 0-6-6 6 6 0 0 0-3 1.1" />
+                    <path d="M20 8.5V2l2 2" />
+                    <path d="M22 11V4l-2-2" />
+                  </svg>
+                  Seating: 12 Adults
+                </li>
+                <li class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-wifi w-4 h-4 mr-2 text-orange-500">
+                    <path d="M5 12.55a10 10 0 0 1 14.08 0" />
+                    <path d="M8.5 16.12a5.5 5.5 0 0 1 7 0" />
+                    <line x1="12" x2="12.01" y1="19" y2="19" />
+                  </svg>
+                  Onboard Wi-Fi
+                </li>
+                <li class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-music w-4 h-4 mr-2 text-orange-500">
+                    <path d="M9 18V5l12-2v13" />
+                    <circle cx="6" cy="18" r="3" />
+                    <circle cx="18" cy="16" r="3" />
+                  </svg>
+                  Entertainment System
+                </li>
+              </ul>
+
+              <!-- Available Status -->
+              <p class="text-sm font-semibold text-red-600 mb-4">Status: Not Available</p>
+
+              <button onclick="showMessage('Request booking for Tempo Traveller.')"
+                class="w-full py-2 text-sm font-semibold text-white bg-gray-900 rounded-full hover:bg-gray-700 transition">Book
+                This</button>
+            </div>
+          </div>
+
+          <!-- Vehicle Card 4: Sedan -->
+          <div
+            class="snap-start flex-shrink-0 w-[80vw] sm:w-[45vw] md:w-[30vw] lg:w-auto bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 border border-gray-100">
+            <img src="https://placehold.co/400x250/60a5fa/ffffff?text=Premium+Sedan"
+              onerror="this.src='https://placehold.co/400x250/60a5fa/ffffff?text=Sedan';" alt="Premium Sedan"
+              class="w-full h-40 object-cover rounded-t-xl">
+            <div class="p-4 text-center">
+              <h3 class="text-2xl font-bold text-gray-900 mb-1">Premium Sedan</h3>
+              <p class="text-xs font-semibold text-gray-700 mb-3">4-Seater Executive Car</p>
+              <ul class="text-left text-sm text-gray-600 space-y-1 mb-4">
+                <li class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-users w-4 h-4 mr-2 text-orange-500">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                  Seating: 4 Adults
+                </li>
+                <li class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-clock w-4 h-4 mr-2 text-orange-500">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                  Hourly Rentals Available
+                </li>
+                <li class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-award w-4 h-4 mr-2 text-orange-500">
+                    <circle cx="12" cy="8" r="7" />
+                    <polyline points="8.21 13.89 7 22 12 18 17 22 15.79 13.89" />
+                  </svg>
+                  Executive Class
+                </li>
+              </ul>
+
+              <!-- Available Status -->
+              <p class="text-sm font-semibold text-green-600 mb-4">Status: Available</p>
+
+              <button onclick="showMessage('Request booking for Premium Sedan.')"
+                class="w-full py-2 text-sm font-semibold text-white bg-gray-900 rounded-full hover:bg-gray-700 transition">Book
+                This</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- 6. Why Choose Us Section (FULL WIDTH CONTAINER with background) -->
+    <section id="why-us" class="w-full py-16 bg-gray-100">
+      <!-- Content constrained inside for padding and max-width -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-12 text-center">Why Choose Krishna Tours?</h2>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Feature 1 -->
+          <div
+            class="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-lg border-t-4 border-orange-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-map-pin-check text-orange-600 mb-4">
+              <path d="M12 18.3a.9.9 0 0 0-.9.9c0 .5.4.9.9.9s.9-.4.9-.9c0-.5-.4-.9-.9-.9Z" />
+              <path
+                d="M15 15.3A9.3 9.3 0 0 0 12 2C6.5 2 2 6.5 2 12c0 4 2.5 7.6 6.1 9.2L12 22l3.9-1.8A9.3 9.3 0 0 0 22 12.3c0-3.3-1.6-6.3-4.1-8.3" />
+              <path d="m14 11 2.5 2.5 4-4" />
+            </svg>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">तज्ञांच्या निवडक सहली</h3>
+            <p class="text-gray-600">आमच्या प्रवासाच्या मार्गदर्शक योजनांना स्थानिक तज्ञांनी बारकाईने आखले आहे, ज्यामुळे तुम्हाला एक प्रामाणिक आणि निर्बाध प्रवास अनुभव मिळतो.</p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div
+            class="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-lg border-t-4 border-orange-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-shield-half text-orange-600 mb-4">
+              <path d="M20 13c0 5-6 9-8 9s-8-4-8-9V5l8-3 8 3v8Z" />
+              <path d="M4 13h16" />
+            </svg>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">सुरक्षा आणि आराम</h3>
+            <p class="text-gray-600">आम्ही तुमच्या सुरक्षिततेला प्राधान्य देतो, आणि त्यामुळे आम्ही चांगल्या प्रकारे देखभाल केलेल्या, आधुनिक वाहनांचा वापर आणि अनुभवी, सत्यापित चालकांची सेवा प्रदान करतो.</p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div
+            class="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-lg border-t-4 border-orange-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-wallet text-orange-600 mb-4">
+              <path
+                d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" />
+            </svg>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">सर्वोत्तम किमतीची हमी</h3>
+            <p class="text-gray-600">आम्ही तुमच्या प्रवास आणि निवासाची गुणवत्ता कमी न करता अत्यंत स्पर्धात्मक दरांमध्ये सेवा देतो.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. FeedBacks/Testimonials Section (FULL WIDTH CONTAINER) -->
+    <section id="feedback" class="w-full py-16">
+      <!-- Content constrained inside for padding and max-width -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-12 text-center">Traveler FeedBacks</h2>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Testimonial 1 -->
+          <div class="p-6 bg-white rounded-xl shadow-xl border-l-4 border-orange-600">
+            <div class="flex text-yellow-500 mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                stroke="none" class="lucide lucide-star">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                stroke="none" class="lucide lucide-star">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                stroke="none" class="lucide lucide-star">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                stroke="none" class="lucide lucide-star">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                stroke="none" class="lucide lucide-star">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </div>
+            <p class="italic text-gray-700 mb-4">"दिवाळीच्या खास ऑफरमध्ये जलगाव ते जयपूर आणि वृंदावन पर्यंतचा प्रवास अविस्मरणीय होता. आरामदायक अर्टिगा XL6 मध्ये सुंदर अनुभव मिळाला!"</p>
+            <p class="font-semibold text-gray-900">- राहुल शर्मा, Mumbai</p>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="p-6 bg-white rounded-xl shadow-xl border-l-4 border-orange-600">
+            <div class="flex text-yellow-500 mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                stroke="none" class="lucide lucide-star">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                stroke="none" class="lucide lucide-star">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                stroke="none" class="lucide lucide-star">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                stroke="none" class="lucide lucide-star">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                stroke="none" class="lucide lucide-star-half">
+                <path d="M12 17.77V2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77Z" />
+              </svg>
+            </div>
+            <p class="italic text-gray-700 mb-4">"दिवाळीत कुटुंबासोबत हा प्रवास खूप छान झाला. ₹10,000 मध्ये इतका आरामदायक आणि सुंदर अनुभव मिळाला!"</p>
+            <p class="font-semibold text-gray-900">- अजय गायकवाड, पुणे</p>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="p-6 bg-white rounded-xl shadow-xl border-l-4 border-orange-600">
+            <div class="flex text-yellow-500 mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                stroke="none" class="lucide lucide-star">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                stroke="none" class="lucide lucide-star">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                stroke="none" class="lucide lucide-star">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                stroke="none" class="lucide lucide-star">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                stroke="none" class="lucide lucide-star">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </div>
+            <p class="italic text-gray-700 mb-4">"महाकाल, मथुरा आणि जयपूर भेटीचा अनुभव अप्रतिम होता. सर्व व्यवस्था आणि गाडी खूप चांगली होती!"</p>
+            <p class="font-semibold text-gray-900">- शंकर पाटील, नाशिक</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Contact Us & Map Point Section (FULL WIDTH CONTAINER with background) -->
+    <section id="contact" class="w-full py-16 bg-orange-50 shadow-inner">
+      <!-- Content constrained inside for padding and max-width -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-12 text-center">Get In Touch</h2>
+
+        <div class="grid lg:grid-cols-2 gap-12">
+          <!-- Contact Form -->
+          <div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">Send an Enquiry</h3>
+            <form onsubmit="handleContactSubmit(event)">
+              <div class="space-y-4">
+                <div>
+                  <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                  <input type="text" id="name" name="name" required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50">
+                </div>
+                <div>
+                  <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                  <input type="email" id="email" name="email" required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50">
+                </div>
+                <div>
+                  <label for="message" class="block text-sm font-medium text-gray-700">Your Message / Trip
+                    Interest</label>
+                  <textarea id="message" name="message" rows="4" required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50"></textarea>
+                </div>
+                <button type="submit"
+                  class="w-full px-6 py-3 bg-orange-600 text-white font-semibold rounded-lg hover:bg-orange-700 transition duration-300 shadow-md">
+                  Submit Enquiry
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Map Point and Details -->
+          <div id="map-point">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">Our Location</h3>
+            <div class="rounded-xl overflow-hidden shadow-2xl mb-6">
+              <!-- Placeholder Map Embed -->
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d622.5693825808747!2d75.57154845646265!3d20.98828852426989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd90e564d2cbd4b%3A0xb510285443b924a2!2sShree%20Ganpati%20Mandir%20and%20narmadeshwar%20mahadev%20mandir!5e1!3m2!1sen!2sin!4v1760509674510!5m2!1sen!2sin"
+                width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-map-pin text-orange-600 mr-3 mt-1 flex-shrink-0">
+                  <path d="M12 18.3a.9.9 0 0 0-.9.9c0 .5.4.9.9.9s.9-.4.9-.9c0-.5-.4-.9-.9-.9Z" />
+                  <path d="M12 22s-8-4.5-8-11.8C4 5.2 7.6 2 12 2c4.4 0 8 3.2 8 8.2 0 7.3-8 11.8-8 11.8Z" />
+                </svg>
+                <p class="text-gray-700">Office Address: 123, Travel Plaza, Phase 1, Hinjewadi, Pune - 411057</p>
+              </div>
+              <div class="flex items-start">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-phone text-orange-600 mr-3 mt-1 flex-shrink-0">
+                  <path
+                    d="M22 16.9v3a2 2 0 0 1-2 2h-3.69a.9.9 0 0 1-.7-.28l-2.7-2.7a.9.9 0 0 1-.28-.7V14a.9.9 0 0 1 .28-.7l2.7-2.7a.9.9 0 0 1 .7-.28H18a2 2 0 0 1 2 2h-4.38a.9.9 0 0 0-.7.28l-2.7 2.7a.9.9 0 0 0-.28.7V19a.9.9 0 0 0 .28.7l2.7 2.7a.9.9 0 0 0 .7.28H20a2 2 0 0 0 2-2V16.9a.9.9 0 0 0-1.8 0Z" />
+                </svg>
+                <p class="text-gray-700">Phone: <a href="tel:+919876543210" class="hover:text-orange-600 transition">+91
+                    98765 43210</a></p>
+              </div>
+              <div class="flex items-start">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-mail text-orange-600 mr-3 mt-1 flex-shrink-0">
+                  <rect width="20" height="16" x="2" y="4" rx="2" />
+                  <path d="m22 7-8.9 5.8a1.9 1.9 0 0 1-2.2 0L2 7" />
+                </svg>
+                <p class="text-gray-700">Email: <a href="mailto:info@krishnatours.com"
+                    class="hover:text-orange-600 transition">info@krishnatours.com</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 9. Quick Links Footer (FULL WIDTH CONTAINER) -->
+  <footer class="bg-gray-900 text-white pt-12 pb-8 w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-8 border-b border-gray-700 pb-8">
+        <!-- Column 1: Logo & Mission -->
+        <div class="col-span-2 md:col-span-2">
+          <h4 class="text-3xl font-extrabold text-orange-500 mb-4">Krishna Tours and Travels</h4>
+          <p class="text-gray-400 text-sm">
+            Your trusted partner for comfortable and memorable travel across India. Experience the difference with our
+            dedicated service.
+          </p>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div>
+          <h5 class="text-lg font-semibold mb-4 text-white">Quick Links</h5>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#featured" class="text-gray-400 hover:text-orange-500 transition">Home</a></li>
+            <li><a href="#trips" class="text-gray-400 hover:text-orange-500 transition">Our Trips</a></li>
+            <li><a href="#vehicles" class="text-gray-400 hover:text-orange-500 transition">Our Vehicles</a></li>
+            <li><a href="#why-us" class="text-gray-400 hover:text-orange-500 transition">Why Choose Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Support -->
+        <div>
+          <h5 class="text-lg font-semibold mb-4 text-white">Support</h5>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" onclick="showMessage('FAQ Page - Coming Soon')"
+                class="text-gray-400 hover:text-orange-500 transition">FAQ</a></li>
+            <li><a href="#" onclick="showMessage('Terms & Conditions - Coming Soon')"
+                class="text-gray-400 hover:text-orange-500 transition">Terms & Conditions</a></li>
+            <li><a href="#" onclick="showMessage('Privacy Policy - Coming Soon')"
+                class="text-gray-400 hover:text-orange-500 transition">Privacy Policy</a></li>
+            <li><a href="#contact" class="text-gray-400 hover:text-orange-500 transition">Contact Support</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Destinations (Example) -->
+        <div>
+          <h5 class="text-lg font-semibold mb-4 text-white">Popular Tours</h5>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" onclick="showMessage('North India Tours')"
+                class="text-gray-400 hover:text-orange-500 transition">North India</a></li>
+            <li><a href="#" onclick="showMessage('South India Tours')"
+                class="text-gray-400 hover:text-orange-500 transition">South India</a></li>
+            <li><a href="#" onclick="showMessage('Customised Pilgrimages')"
+                class="text-gray-400 hover:text-orange-500 transition">Pilgrimages</a></li>
+            <li><a href="#" onclick="showMessage('Weekend Getaways')"
+                class="text-gray-400 hover:text-orange-500 transition">Weekend Getaways</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Copyright and Social Icons -->
+      <div
+        class="mt-8 pt-4 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+        <p>&copy; <span id="current-year"></span> Krishna Tours and Travels. All rights reserved.</p>
+        <div class="flex space-x-4 mt-4 md:mt-0">
+          <a href="#" class="hover:text-orange-500 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-facebook">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+            </svg>
+          </a>
+          <a href="#" class="hover:text-orange-500 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-instagram">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" x2="17.5" y1="6.5" y2="6.5" />
+            </svg>
+          </a>
+          <a href="#" class="hover:text-orange-500 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-twitter">
+              <path
+                d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2 1.2-1.1 1.9-2.7 2-4.4C8 10.3 6 5.8 5 4" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div style="text-align:center;">
+    Devloped By Mukesh Patil !!!
+  </div>
+  <!-- WhatsApp Floating Icon -->
+  <a href="https://wa.me/918530330177?text=Hi,%20I%20am%20interested%20in%20your%20services!" target="_blank"
+    id="whatsapp-icon" class="fixed bottom-4 right-4 z-50">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png"
+      alt="WhatsApp" style="width: 70px; height: 70px;" />
+  </a>
+
+  <!-- Style (Optional) -->
+  <style>
+    #whatsapp-icon {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    #whatsapp-icon:hover {
+      transform: scale(1.1);
+    }
+  </style>
+
+
+  <script>
+    // --- 1. Hamburger Menu Toggle Logic ---
+    const menuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    function toggleMenu() {
+      const isMenuOpen = mobileMenu.classList.toggle('hidden');
+      if (isMenuOpen) {
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      } else {
+        menuIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+      }
+    }
+    menuButton.addEventListener('click', toggleMenu);
+
+
+    // --- 2. Featured Image Slider Logic ---
+    const slider = document.getElementById('image-slider');
+    const slides = Array.from(slider.querySelectorAll('.slider-item'));
+    const prevButton = document.getElementById('prev-button');
+    const nextButton = document.getElementById('next-button');
+    const dotsContainer = document.getElementById('slider-dots');
+    let currentSlideIndex = 0;
+    let autoSlideInterval;
+
+    function updateSlider() {
+      slides.forEach((slide, index) => {
+        slide.classList.remove('active');
+        if (index === currentSlideIndex) {
+          slide.classList.add('active');
+        }
+      });
+      updateDots();
+    }
+
+    function nextSlide() {
+      currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+      updateSlider();
+    }
+
+    function prevSlide() {
+      currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+      updateSlider();
+    }
+
+    // Dot Navigation
+    function createDots() {
+      slides.forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.className = 'w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100 transition duration-300';
+        dot.addEventListener('click', () => {
+          currentSlideIndex = index;
+          updateSlider();
+          resetAutoSlide();
+        });
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    function updateDots() {
+      Array.from(dotsContainer.children).forEach((dot, index) => {
+        dot.classList.toggle('opacity-100', index === currentSlideIndex);
+        dot.classList.toggle('opacity-50', index !== currentSlideIndex);
+      });
+    }
+
+    function resetAutoSlide() {
+      clearInterval(autoSlideInterval);
+      autoSlideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+    }
+
+    // Initialize slider
+    prevButton.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
+    nextButton.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
+    createDots();
+    updateSlider(); // Initial display
+    resetAutoSlide(); // Start auto-slide
+
+
+    // --- 3. Custom Message Box (Replaces alert()) ---
+    const msgBox = document.getElementById('message-box');
+    let msgTimeout;
+
+    function showMessage(message, duration = 3000) {
+      clearTimeout(msgTimeout);
+      msgBox.textContent = message;
+      msgBox.classList.remove('hidden', 'bg-red-500', 'bg-green-500');
+      msgBox.classList.add('bg-orange-600', 'animate-in'); // Use a custom Tailwind color for theme
+
+      // Use requestAnimationFrame for immediate transition reset if needed
+      requestAnimationFrame(() => {
+        msgBox.style.opacity = 1;
+        msgBox.style.transform = 'translateX(0)';
+      });
+
+      msgTimeout = setTimeout(() => {
+        msgBox.style.opacity = 0;
+        msgBox.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+          msgBox.classList.add('hidden');
+        }, 500); // Wait for transition to finish
+      }, duration);
+    }
+
+    // --- 4. Contact Form Handler ---
+    function handleContactSubmit(event) {
+      event.preventDefault();
+      // In a real application, you would send this data to a server/API
+      showMessage('Enquiry Sent! We will contact you soon.', 5000);
+      event.target.reset(); // Clear the form
+    }
+
+    // --- 5. Footer Year Update ---
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // --- 6. Initialize Lucide Icons ---
+    window.onload = function () {
+      lucide.createIcons();
+    };
+  </script>
+</body>
+
+</html>
